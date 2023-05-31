@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Personalizar Chisme</title>
+  <style>
+    body {
+      background-color: #eaf2f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      max-width: 500px;
+      text-align: center;
+    }
+    
+    h1, h2, h3 {
+      color: #333;
+    }
+    
+    label, input, textarea, button {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function guardarPersonalizacion() {
+      var titulo = document.getElementById("titulo").value;
+      var descripcion = document.getElementById("descripcion").value;
+      
+      var chisme = {
+        titulo: titulo,
+        descripcion: descripcion
+      };
+      
+      var chismesRecientes = localStorage.getItem("chismesRecientes");
+  
+      if (chismesRecientes) {
+        var chismes = JSON.parse(chismesRecientes);
+        chismes.push(chisme);
+        localStorage.setItem("chismesRecientes", JSON.stringify(chismes));
+      } else {
+        var nuevosChismes = [chisme];
+        localStorage.setItem("chismesRecientes", JSON.stringify(nuevosChismes));
+      }
+      
+      // Redirige a la página principal después de guardar la personalización
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Personalizar Chisme</h1>
+  
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" required>
+  
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" required></textarea>
+  
+    <button onclick="guardarPersonalizacion()">Guardar Personalización</button>
+  </div>
+</body>
+</html>
